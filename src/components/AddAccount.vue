@@ -4,7 +4,7 @@
             <el-cascader v-model="form.category" :options="categorys" :props="cascaderProps" style="width: 100%" />
         </el-form-item>
         <el-form-item label="时间" prop="date">
-            <el-date-picker format="YYYY/MM/DD" value-format="YYYY-MM-DD" v-model="form.date" type="date"
+            <el-date-picker format="YYYY-MM-DD" value-format="YYYY-MM-DD" v-model="form.date" type="date"
                 placeholder="Pick a date" style="width: 100%" />
         </el-form-item>
         <el-form-item label="金额" prop="number">
@@ -27,9 +27,13 @@ const ruleFormRef = ref()
 const cascaderProps = {
     expandTrigger: 'hover',
 }
+const time = new Date();
+const month = time.getMonth() >= 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
+const date = time.getDate() > 9 ? time.getDate() : '0' + time.getDate()
+const time2 = time.getFullYear() + '-' + month + '-' + date;
 const form = reactive({
     category: [],
-    date: '',
+    date: time2,
     amount: 0,
     remark: '',
 })
